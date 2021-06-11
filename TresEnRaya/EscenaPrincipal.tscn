@@ -1,0 +1,23 @@
+[gd_scene format=2]
+
+[node name="EscenaPrincipal" type="Node2D"]
+
+[node name="Cliente" type="Button" parent="."]
+margin_left = 51.0
+margin_top = 47.0
+margin_right = 981.0
+margin_bottom = 291.0
+text = "Cliente"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Server" type="Button" parent="."]
+margin_left = 56.0397
+margin_top = 319.143
+margin_right = 986.04
+margin_bottom = 563.143
+text = "SERVER"
+__meta__ = {
+"_edit_use_anchors_": false
+}

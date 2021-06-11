@@ -1,0 +1,156 @@
+[gd_scene format=2]
+
+[node name="Juego" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 296.215
+margin_top = 56.274
+margin_right = 424.215
+margin_bottom = 82.274
+text = "1"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="."]
+margin_left = 449.744
+margin_top = 55.0807
+margin_right = 577.744
+margin_bottom = 81.0807
+text = "2"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="."]
+margin_left = 611.476
+margin_top = 57.4591
+margin_right = 739.476
+margin_bottom = 83.4591
+text = "3"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label4" type="Label" parent="."]
+margin_left = 244.433
+margin_top = 98.9467
+margin_right = 276.433
+margin_bottom = 229.947
+text = "A"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label5" type="Label" parent="."]
+margin_left = 243.244
+margin_top = 257.111
+margin_right = 275.244
+margin_bottom = 388.111
+text = "B"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label6" type="Label" parent="."]
+margin_left = 236.517
+margin_top = 418.563
+margin_right = 268.517
+margin_bottom = 549.563
+text = "C"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1A" type="Button" parent="."]
+margin_left = 292.417
+margin_top = 97.8236
+margin_right = 427.417
+margin_bottom = 233.824
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2A" type="Button" parent="."]
+margin_left = 450.727
+margin_top = 98.903
+margin_right = 585.727
+margin_bottom = 234.903
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="3A" type="Button" parent="."]
+margin_left = 610.081
+margin_top = 97.7139
+margin_right = 745.081
+margin_bottom = 233.714
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1B" type="Button" parent="."]
+margin_left = 291.228
+margin_top = 254.799
+margin_right = 426.228
+margin_bottom = 390.799
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2B" type="Button" parent="."]
+margin_left = 449.538
+margin_top = 255.878
+margin_right = 584.538
+margin_bottom = 391.878
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="3B" type="Button" parent="."]
+margin_left = 608.891
+margin_top = 254.689
+margin_right = 743.891
+margin_bottom = 390.689
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="1C" type="Button" parent="."]
+margin_left = 291.228
+margin_top = 416.251
+margin_right = 426.228
+margin_bottom = 552.251
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="2C" type="Button" parent="."]
+margin_left = 449.538
+margin_top = 417.331
+margin_right = 584.538
+margin_bottom = 553.33
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="3C" type="Button" parent="."]
+margin_left = 608.891
+margin_top = 416.141
+margin_right = 743.891
+margin_bottom = 552.141
+__meta__ = {
+"_edit_use_anchors_": false
+}

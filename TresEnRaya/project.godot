@@ -16,6 +16,7 @@ _global_script_class_icons={
 [application]
 
 config/name="TresEnRaya"
+run/main_scene="res://EscenaPrincipal.tscn"
 config/icon="res://icon.png"
 
 [rendering]
