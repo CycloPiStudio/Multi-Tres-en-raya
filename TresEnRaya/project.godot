@@ -19,6 +19,10 @@ config/name="TresEnRaya"
 run/main_scene="res://EscenaPrincipal.tscn"
 config/icon="res://icon.png"
 
+[autoload]
+
+GlobalServer="*res://globales/global_server.gd"
+
 [rendering]
 
 quality/driver/driver_name="GLES2"
