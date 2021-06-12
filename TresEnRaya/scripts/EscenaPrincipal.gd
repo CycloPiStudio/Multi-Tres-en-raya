@@ -1,5 +1,4 @@
-extends Node2D
-
+extends Control
 
 onready var ClienteTextEditSERVER_IP = get_node("Cliente/TextEditSERVER_IP")
 onready var ClienteTextEditSERVER_PORT = get_node("Cliente/TextEditSERVER_PORT")

@@ -1,0 +1,94 @@
+[gd_scene load_steps=2 format=2]
+
+[ext_resource path="res://scripts/EscenaPrincipal.gd" type="Script" id=1]
+
+[node name="Seleccionar" type="Control"]
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Cliente" type="Button" parent="."]
+margin_left = 54.3636
+margin_top = 196.679
+margin_right = 984.364
+margin_bottom = 277.679
+text = "Cliente"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEditSERVER_IP" type="TextEdit" parent="Cliente"]
+margin_left = 1.31824
+margin_top = -84.4962
+margin_right = 308.318
+margin_bottom = -22.4962
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelSERVER_IP" type="Label" parent="Cliente"]
+margin_left = 6.72711
+margin_top = -164.816
+margin_right = 303.727
+margin_bottom = -105.816
+text = "SERVER_IP"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEditSERVER_PORT" type="TextEdit" parent="Cliente"]
+margin_left = 618.536
+margin_top = -81.1326
+margin_right = 925.536
+margin_bottom = -19.1326
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelSERVER_PORT" type="Label" parent="Cliente"]
+margin_left = 622.263
+margin_top = -163.134
+margin_right = 919.263
+margin_bottom = -104.134
+text = "SERVER_PORT"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Server" type="Button" parent="."]
+margin_left = 57.7272
+margin_top = 443.903
+margin_right = 987.727
+margin_bottom = 524.903
+text = "Server"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextEditSERVER_PORT" type="TextEdit" parent="Server"]
+margin_left = 1.31824
+margin_top = -84.4962
+margin_right = 308.318
+margin_bottom = -22.4962
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LabelSERVER_PORT" type="Label" parent="Server"]
+margin_left = 6.72711
+margin_top = -166.497
+margin_right = 303.727
+margin_bottom = -107.497
+text = "SERVER_PORT"
+align = 1
+valign = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="Cliente" to="." method="_on_Cliente_pressed"]
+[connection signal="pressed" from="Server" to="." method="_on_Server_pressed"]

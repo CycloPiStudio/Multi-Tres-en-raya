@@ -3,7 +3,7 @@ var peer = NetworkedMultiplayerENet.new()
 #var SERVER_PORT = 6969
 var MAX_PLAYERS = 2
 #var SERVER_IP = "192.168.18.32"
-
+onready var scene = preload("res://Juego.tscn")
 func _ready():
 	pass
 
@@ -28,12 +28,26 @@ func create_client(SERVER_IP, SERVER_PORT):
 
 func _OnConnectionFailed():
 	print(" fallo de red")
-
+	end_juego()
 func _OnConnectionSucceeded():
 	print("Conectado al servidor")
-
+	start_juego()
 func _Peer_Connected(player_id):
 	print("User " + str(player_id) + " Connected")
-	
+	start_juego()
 func _Peer_Disconnected(player_id):
 	print("User " + str(player_id) + " Disconnected")
+	end_juego()
+
+func start_juego():
+#	scene = load("res://0_practice_folder/mc/instance_box.tscn")
+#	scene = load("res://0_practice_folder/mc/instance_box.tscn")
+	var node = scene.instance()
+#	self.add_child(node)
+	add_child(node)
+#	get_node("EscenaPrincipal/Seleccionar").queue_free()
+	get_tree().get_root().get_node("EscenaPrincipal/Seleccionar").queue_free()
+#	print(self.get_children())
+	
+func end_juego():
+	pass
