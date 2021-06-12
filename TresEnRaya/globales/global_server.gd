@@ -31,10 +31,16 @@ func _OnConnectionFailed():
 	end_juego()
 func _OnConnectionSucceeded():
 	print("Conectado al servidor")
+	
+	
+	
 	start_juego()
 func _Peer_Connected(player_id):
 	print("User " + str(player_id) + " Connected")
+	
 	start_juego()
+	
+
 func _Peer_Disconnected(player_id):
 	print("User " + str(player_id) + " Disconnected")
 	end_juego()
@@ -51,3 +57,6 @@ func start_juego():
 	
 func end_juego():
 	pass
+#func Pulsacion(boton):
+#
+#	pass
