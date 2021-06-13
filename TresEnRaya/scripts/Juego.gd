@@ -1,6 +1,13 @@
 extends Control
 
-onready var lista_botones = []
+onready var lista_botones = {
+	"primeroA" : null,"segundoA" : null,"terceroA" : null,
+	"primeroB" : null,"segundoB" : null,"terceroB" : null,
+	"primeroC" : null,"segundoC" : null,"terceroC" : null
+	}
+
+onready var JugadorLabel = get_node("jugadorLabel")
+
 onready var primeroA = get_node("1A")
 onready var segundoA = get_node("2A")
 onready var terceroA = get_node("3A")
@@ -15,6 +22,7 @@ onready var terceroC = get_node("3C")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+#	print("mi peer",get_tree().get_network_unique_id())
 #	lista_botones.append(primeroA)
 #	lista_botones.append(segundoA)
 #	lista_botones.append(terceroA)
@@ -27,7 +35,7 @@ func _ready():
 #	lista_botones.append(segundoC)
 #	lista_botones.append(terceroC)
 	
-	
+	JugadorLabel.set_text(GlobalServer.jugador) 
 	pass # Replace with function body.
 	
 	
@@ -47,9 +55,12 @@ func desactivar_botones():
 	terceroC.disabled = true
 
 func _on_1A_pressed():
-#	rpc_unreliable_id(1, "Pulsacion", primeroA ) 
-
-	desactivar_botones()
 	
+#	rpc_id(<peer_id>,"function_name", <optional_args>)
+#		rpc_unreliable_id(<peer_id>, "function_name", <optional_args>)
+	
+ #  probando rpc VOY POR AQUI ########################
+	desactivar_botones()
+	GlobalServer.mandar_pulsacion_boton("primeroA")
 	
 	pass # Replace with function body.

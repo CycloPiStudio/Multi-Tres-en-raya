@@ -17,6 +17,7 @@ func _ready():
 
 
 func _on_Cliente_pressed():
+	GlobalServer.jugador = "cliente"
 	var SERVER_IP = ClienteTextEditSERVER_IP.get_text() 
 	var SERVER_PORT = int(ClienteTextEditSERVER_PORT.get_text())
 	
@@ -26,6 +27,7 @@ func _on_Cliente_pressed():
 
 
 func _on_Server_pressed():
+	GlobalServer.jugador = "Server"
 	var SERVER_PORT = int(ClienteTextEditSERVER_PORT.get_text())
 	GlobalServer.create_server(SERVER_PORT)
 	pass # Replace with function body.

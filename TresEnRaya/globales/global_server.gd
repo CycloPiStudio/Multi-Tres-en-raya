@@ -1,4 +1,7 @@
 extends Node
+
+var jugador
+# el servidor es el jugador 0 y el cliente es el 1
 var peer = NetworkedMultiplayerENet.new()
 #var SERVER_PORT = 6969
 var MAX_PLAYERS = 2
@@ -57,6 +60,10 @@ func start_juego():
 	
 func end_juego():
 	pass
-#func Pulsacion(boton):
-#
-#	pass
+
+func mandar_pulsacion_boton(boton):
+	rpc_unreliable_id(1, "Pulsacion", boton)
+	
+remote func Pulsacion(boton):
+	print("llegaste  " + boton)
+	pass
