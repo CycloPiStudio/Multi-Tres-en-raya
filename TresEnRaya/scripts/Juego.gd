@@ -1,11 +1,5 @@
 extends Control
 
-onready var lista_botones = {
-	"primeroA" : null,"segundoA" : null,"terceroA" : null,
-	"primeroB" : null,"segundoB" : null,"terceroB" : null,
-	"primeroC" : null,"segundoC" : null,"terceroC" : null
-	}
-
 onready var JugadorLabel = get_node("jugadorLabel")
 
 onready var primeroA = get_node("1A")
@@ -22,45 +16,134 @@ onready var terceroC = get_node("3C")
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-#	print("mi peer",get_tree().get_network_unique_id())
-#	lista_botones.append(primeroA)
-#	lista_botones.append(segundoA)
-#	lista_botones.append(terceroA)
-#
-#	lista_botones.append(primeroB)
-#	lista_botones.append(segundoB)
-#	lista_botones.append(terceroB)
-#
-#	lista_botones.append(primeroC)
-#	lista_botones.append(segundoC)
-#	lista_botones.append(terceroC)
-	
+	actualizarBotones()
+	JugadorLabel.set_text(GlobalServer.jugador) 
+	if GlobalServer.jugador == "Server":
+		desactivar_activar_botones(true)
 	JugadorLabel.set_text(GlobalServer.jugador) 
 	pass # Replace with function body.
 	
-	
 
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-#func _process(delta):
-#	pass
-func desactivar_botones():
-	primeroA.disabled = true
-	segundoA.disabled = true
-	terceroA.disabled = true
-	primeroB.disabled = true
-	segundoB.disabled = true
-	terceroB.disabled = true
-	primeroC.disabled = true
-	segundoC.disabled = true
-	terceroC.disabled = true
+func desactivar_activar_botones(siOno):
+	primeroA.disabled = siOno
+	segundoA.disabled = siOno
+	terceroA.disabled = siOno
+	primeroB.disabled = siOno
+	segundoB.disabled = siOno
+	terceroB.disabled = siOno
+	primeroC.disabled = siOno
+	segundoC.disabled = siOno
+	terceroC.disabled = siOno
+
+func activarBotones():
+	pass
+func actualizarBotones():
+#	print("GlobalServer.dic_botones.dic_botones[primeroA]" , GlobalServer.dic_botones.dic_botones[primeroA])
+	primeroA.set_text(GlobalServer.dic_botones["primeroA"])
+	segundoA.set_text(GlobalServer.dic_botones["segundoA"])
+	terceroA.set_text(GlobalServer.dic_botones["terceroA"])
+
+	primeroB.set_text(GlobalServer.dic_botones["primeroB"])
+	segundoB.set_text(GlobalServer.dic_botones["segundoB"])
+	terceroB.set_text(GlobalServer.dic_botones["terceroB"])
+#
+	primeroC.set_text(GlobalServer.dic_botones["primeroC"])
+	segundoC.set_text(GlobalServer.dic_botones["segundoC"])
+	terceroC.set_text(GlobalServer.dic_botones["terceroC"])
+	pass
 
 func _on_1A_pressed():
-	
-#	rpc_id(<peer_id>,"function_name", <optional_args>)
-#		rpc_unreliable_id(<peer_id>, "function_name", <optional_args>)
-	
- #  probando rpc VOY POR AQUI ########################
-	desactivar_botones()
-	GlobalServer.mandar_pulsacion_boton("primeroA")
-	
-	pass # Replace with function body.
+	desactivar_activar_botones(true)
+	if GlobalServer.dic_botones["primeroA"] == "vacio":
+		if GlobalServer.jugador == "Server":
+			GlobalServer.ServerCambiaDic("primeroA","Server")
+		elif GlobalServer.jugador == "cliente":
+			GlobalServer.ClientePulsacion("primeroA",GlobalServer.jugador)
+	else:
+		pass
+
+func _on_2A_pressed():
+	desactivar_activar_botones(true)
+	if GlobalServer.dic_botones["segundoA"] == "vacio":
+		if GlobalServer.jugador == "Server":
+#			print("Server  " + " segundoA")
+			GlobalServer.ServerCambiaDic("segundoA","Server")
+		elif GlobalServer.jugador == "cliente":
+			GlobalServer.ClientePulsacion("segundoA",GlobalServer.jugador)
+	else:
+		pass
+
+func _on_3A_pressed():
+	desactivar_activar_botones(true)
+	if GlobalServer.dic_botones["terceroA"] == "vacio":
+		if GlobalServer.jugador == "Server":
+#			print("Server  " + " terceroA")
+			GlobalServer.ServerCambiaDic("terceroA","Server")
+		elif GlobalServer.jugador == "cliente":
+			GlobalServer.ClientePulsacion("terceroA",GlobalServer.jugador)
+	else:
+		pass
+
+func _on_1B_pressed():
+	desactivar_activar_botones(true)
+	if GlobalServer.dic_botones["primeroB"] == "vacio":
+		if GlobalServer.jugador == "Server":
+#			print("Server  " + " primeroB")
+			GlobalServer.ServerCambiaDic("primeroB","Server")
+		elif GlobalServer.jugador == "cliente":
+			GlobalServer.ClientePulsacion("primeroB",GlobalServer.jugador)
+	else:
+		pass
+
+func _on_2B_pressed():
+	desactivar_activar_botones(true)
+	if GlobalServer.dic_botones["segundoB"] == "vacio":
+		if GlobalServer.jugador == "Server":
+#			print("Server  " + " segundoB")
+			GlobalServer.ServerCambiaDic("segundoB","Server")
+		elif GlobalServer.jugador == "cliente":
+			GlobalServer.ClientePulsacion("segundoB",GlobalServer.jugador)
+
+func _on_3B_pressed():
+	desactivar_activar_botones(true)
+	if GlobalServer.dic_botones["terceroB"] == "vacio":
+		if GlobalServer.jugador == "Server":
+			print("Server  " + " terceroB")
+			GlobalServer.ServerCambiaDic("terceroB","Server")
+		elif GlobalServer.jugador == "cliente":
+			GlobalServer.ClientePulsacion("terceroB",GlobalServer.jugador)
+	else:
+		pass
+
+func _on_1C_pressed():
+	desactivar_activar_botones(true)
+	if GlobalServer.dic_botones["primeroC"] == "vacio":
+		if GlobalServer.jugador == "Server":
+#			print("Server  " + " primeroC")
+			GlobalServer.ServerCambiaDic("primeroC","Server")
+		elif GlobalServer.jugador == "cliente":
+			GlobalServer.ClientePulsacion("primeroC",GlobalServer.jugador)
+	else:
+		pass
+
+func _on_2C_pressed():
+	desactivar_activar_botones(true)
+	if GlobalServer.dic_botones["segundoC"] == "vacio":
+		if GlobalServer.jugador == "Server":
+			print("Server  " + " segundoC")
+			GlobalServer.ServerCambiaDic("segundoC","Server")
+		elif GlobalServer.jugador == "cliente":
+			GlobalServer.ClientePulsacion("segundoC",GlobalServer.jugador)
+	else:
+		pass
+
+func _on_3C_pressed():
+	desactivar_activar_botones(true)
+	if GlobalServer.dic_botones["terceroC"] == "vacio":
+		if GlobalServer.jugador == "Server":
+			print("Server  " + " terceroC")
+			GlobalServer.ServerCambiaDic("terceroC","Server")
+		elif GlobalServer.jugador == "cliente":
+			GlobalServer.ClientePulsacion("terceroC",GlobalServer.jugador)
+	else:
+		pass

@@ -173,3 +173,11 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 [connection signal="pressed" from="1A" to="." method="_on_1A_pressed"]
+[connection signal="pressed" from="2A" to="." method="_on_2A_pressed"]
+[connection signal="pressed" from="3A" to="." method="_on_3A_pressed"]
+[connection signal="pressed" from="1B" to="." method="_on_1B_pressed"]
+[connection signal="pressed" from="2B" to="." method="_on_2B_pressed"]
+[connection signal="pressed" from="3B" to="." method="_on_3B_pressed"]
+[connection signal="pressed" from="1C" to="." method="_on_1C_pressed"]
+[connection signal="pressed" from="2C" to="." method="_on_2C_pressed"]
+[connection signal="pressed" from="3C" to="." method="_on_3C_pressed"]
