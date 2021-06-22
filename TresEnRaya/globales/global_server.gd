@@ -1,5 +1,5 @@
 extends Node
-
+### jugador "SErver o cliente ####
 var jugador
 # el servidor es el jugador 0 y el cliente es el 1
 var peer = NetworkedMultiplayerENet.new()
@@ -15,7 +15,8 @@ onready var dic_botones = {
 	}
 
 onready var scene = preload("res://Juego.tscn")
-
+onready var scenaprincipal = get_tree().get_root().get_node("EscenaPrincipal")
+onready var Ganarpop = get_tree().get_root().get_node("EscenaPrincipal/GanarPop")
 
 
 func _ready():
@@ -23,8 +24,6 @@ func _ready():
 	pass
 
 func create_server(SERVER_PORT):
-	
-	
 	
 	peer.create_server(SERVER_PORT, MAX_PLAYERS)
 	get_tree().network_peer = peer
@@ -46,10 +45,8 @@ func _OnConnectionFailed():
 	end_juego()
 func _OnConnectionSucceeded():
 	print("Conectado al servidor")
-	
-	
-	
 	start_juego()
+
 func _Peer_Connected(player_id):
 	print("User " + str(player_id) + " Connected")
 	start_juego()
@@ -67,49 +64,125 @@ func start_juego():
 	get_tree().get_root().get_node("EscenaPrincipal/Seleccionar").queue_free()
 
 	
-func end_juego():
-	pass
-#### el cliente le manda al servidor la pulsacion #### solo lado cliente
+
+
+#### el cliente manda la pulsacion al servidor #####
 func ClientePulsacion(boton, idjugador):
-	
+#
 	rpc_unreliable_id(1, "ClienteCambiaDic", boton, idjugador)
-	
-	
-
-#### el servidor recibe la pulsacion #### esta funcion solo la activa  el cliente
-
-remote func ClienteCambiaDic(boton, idjugador):
-	print("llego el cliente al servidor  " + boton + idjugador)
-	
-	dic_botones[boton] = idjugador
-	get_node("/root/EscenaPrincipal/Juego").actualizarBotones()
-	ServerEnviarDic(idjugador)
-	var nodojuego = get_node("/root/EscenaPrincipal/Juego")
-	nodojuego.desactivar_activar_botones(false)
 
 
+
+####el servidor recive la pulsacion 
+remote func ClienteCambiaDic(boton, idjugador):	
+	ServerCambiaDic(boton, idjugador)
+
+
+###### el servidor cambia el diccoinario
 func ServerCambiaDic(boton, idjugador):
 	##### cambio vacio por el nombre del jugador
-	dic_botones[boton] = idjugador
-	ServerEnviarDic(idjugador)
+	# le doy al diccionario el valor del boton pulsado	
+	dic_botones [boton] = idjugador
+	var ganador = ComprobarResultado(idjugador) 
+	print("ComprobarResultado(idjugador)"   , ComprobarResultado(idjugador))
+	print(" ganador   " , ganador)
+	
+	#### comprueba si hay un ganador ####
+	if ganador == idjugador:
+		GanarPerder(ganador)
+#		pass
+
+#### idjugador es  el jugador que envia la pcr 
+#### ComprobarResultado(idjugador) ### te devuelve el resultado el ganador
+	ServerEnviarDic(idjugador, ganador)
 	get_node("/root/EscenaPrincipal/Juego").actualizarBotones()
 
 #### envia el diccionario al clienete
 
-func ServerEnviarDic(idjugador):
+func ServerEnviarDic(idjugador, ganador):
+	#### almaceno el dicionario en dic
 	var dic = dic_botones
+	var nodojuego = get_node("/root/EscenaPrincipal/Juego")
+#	if ganador == idjugador:
+#		pass
+	rpc_unreliable_id(0, "clienteReciveDic", dic, idjugador, ganador)
 
-	rpc_unreliable_id(0, "clienteReciveDic", dic, idjugador)
+	### simulo el turno bloqueando los botones
+	if idjugador == "cliente":
+		nodojuego.desactivar_activar_botones(false)
 	
-	print("envia el diccionario : " , dic)
-
 	################ cambiar en el cliente el diccionario 
 	
-remote func clienteReciveDic(dic,idjugador):
+remote func clienteReciveDic(dic, idjugador, ganador):
+	#### escena para comunicarse con "Escena Juego"
 	var nodojuego = get_node("/root/EscenaPrincipal/Juego")
+	#### coge el dic
 	dic_botones = dic
 	nodojuego.actualizarBotones()
-	if idjugador == "Server":
+	#### activa los botones para simular los turnos #####
+	
+	if idjugador == "Server" and not ganador == idjugador:
 		nodojuego.desactivar_activar_botones(false)
-	print("ha recivido de vuelta el diccionario")
+	
+	if ganador == idjugador:
+		GanarPerder(ganador)
+	
+func end_juego():
+	pass
+
+func GanarPerder(ganador):
+	scenaprincipal.IntanciarImagenResult(ganador)
+	Ganarpop.visible = true
+	print("Gano :  ", ganador)
+
+#### introducir casos
+func ComprobarResultado(idjugador):
+#	var ganador = "Sigue jugando"
+	var dicValues = dic_botones.values()
+	var pA = dicValues[0]
+	var sA = dicValues[1]
+	var tA = dicValues[2]
+	var pB = dicValues[3]
+	var sB = dicValues[4]
+	var tB = dicValues[5]
+	var pC = dicValues[6]
+	var sC = dicValues[7]
+	var tC = dicValues[8]
+	
+	match dicValues:
+################################# horizontales
+		[idjugador, idjugador, idjugador, pB, sB, tB, pC, sC, tC]:
+#			print("HAS GANADO!!!!!!!!!!!!!!!, idjugador, con pA, sA, tA: ", idjugador)
+			return idjugador
+		[pA, sA, tA, idjugador, idjugador, idjugador, pC, sC, tC]:
+#			print("HAS GANADO!!!!!!!!!!!!!!!, idjugador: ", idjugador)
+			return idjugador
+		[pA, sA, tA, pB, sB, tB, idjugador, idjugador, idjugador]:
+#			print("HAS GANADO!!!!!!!!!!!!!!!, idjugador: ", idjugador)
+			return idjugador
+################################# verticales
+		[idjugador, sA, tA, idjugador, sB, tB, idjugador, sC, tC]:
+#			print("HAS GANADO!!!!!!!!!!!!!!!, idjugador: ", idjugador)
+			return idjugador
+		[pA, idjugador, tA, pB, idjugador, tB, pC, idjugador, tC]:
+#			print("HAS GANADO!!!!!!!!!!!!!!!, idjugador: ", idjugador)
+			return idjugador
+		[pA, sA, idjugador, pB, sB, idjugador, pC, sC, idjugador]:
+#			print("HAS GANADO!!!!!!!!!!!!!!!, idjugador: ", idjugador)
+			return idjugador
+################################# diagonales
+		[idjugador, sA, tA, pB, sB, idjugador, pC, sC, idjugador]:
+#			print("HAS GANADO!!!!!!!!!!!!!!!, idjugador: ", idjugador)
+			return idjugador
+		[pA, sA, idjugador, pB, idjugador, tB, idjugador, sC, tC]:
+#			print("HAS GANADO!!!!!!!!!!!!!!!, idjugador: ", idjugador)
+			return idjugador
+################################# seguir jugando
+		_:
+			return "SeguirJugando"
+
+			
+
+
+
 

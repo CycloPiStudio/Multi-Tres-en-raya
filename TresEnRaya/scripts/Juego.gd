@@ -35,8 +35,7 @@ func desactivar_activar_botones(siOno):
 	segundoC.disabled = siOno
 	terceroC.disabled = siOno
 
-func activarBotones():
-	pass
+
 func actualizarBotones():
 #	print("GlobalServer.dic_botones.dic_botones[primeroA]" , GlobalServer.dic_botones.dic_botones[primeroA])
 	primeroA.set_text(GlobalServer.dic_botones["primeroA"])
@@ -53,62 +52,68 @@ func actualizarBotones():
 	pass
 
 func _on_1A_pressed():
-	desactivar_activar_botones(true)
+	
 	if GlobalServer.dic_botones["primeroA"] == "vacio":
+		desactivar_activar_botones(true)
 		if GlobalServer.jugador == "Server":
 			GlobalServer.ServerCambiaDic("primeroA","Server")
 		elif GlobalServer.jugador == "cliente":
-			GlobalServer.ClientePulsacion("primeroA",GlobalServer.jugador)
+			GlobalServer.ClientePulsacion("primeroA", "cliente")
 	else:
 		pass
 
 func _on_2A_pressed():
-	desactivar_activar_botones(true)
+	
 	if GlobalServer.dic_botones["segundoA"] == "vacio":
+		desactivar_activar_botones(true)
 		if GlobalServer.jugador == "Server":
 #			print("Server  " + " segundoA")
 			GlobalServer.ServerCambiaDic("segundoA","Server")
 		elif GlobalServer.jugador == "cliente":
-			GlobalServer.ClientePulsacion("segundoA",GlobalServer.jugador)
+			GlobalServer.ClientePulsacion("segundoA", "cliente")
 	else:
 		pass
 
 func _on_3A_pressed():
-	desactivar_activar_botones(true)
+	
 	if GlobalServer.dic_botones["terceroA"] == "vacio":
+		desactivar_activar_botones(true)
 		if GlobalServer.jugador == "Server":
 #			print("Server  " + " terceroA")
 			GlobalServer.ServerCambiaDic("terceroA","Server")
 		elif GlobalServer.jugador == "cliente":
-			GlobalServer.ClientePulsacion("terceroA",GlobalServer.jugador)
+			GlobalServer.ClientePulsacion("terceroA", "cliente")
 	else:
 		pass
 
 func _on_1B_pressed():
-	desactivar_activar_botones(true)
+	
 	if GlobalServer.dic_botones["primeroB"] == "vacio":
+		desactivar_activar_botones(true)
 		if GlobalServer.jugador == "Server":
 #			print("Server  " + " primeroB")
 			GlobalServer.ServerCambiaDic("primeroB","Server")
 		elif GlobalServer.jugador == "cliente":
-			GlobalServer.ClientePulsacion("primeroB",GlobalServer.jugador)
+			GlobalServer.ClientePulsacion("primeroB", "cliente")
 	else:
 		pass
 
 func _on_2B_pressed():
-	desactivar_activar_botones(true)
+	
 	if GlobalServer.dic_botones["segundoB"] == "vacio":
+		desactivar_activar_botones(true)
 		if GlobalServer.jugador == "Server":
 #			print("Server  " + " segundoB")
 			GlobalServer.ServerCambiaDic("segundoB","Server")
 		elif GlobalServer.jugador == "cliente":
-			GlobalServer.ClientePulsacion("segundoB",GlobalServer.jugador)
+			GlobalServer.ClientePulsacion("segundoB", "cliente")
 
 func _on_3B_pressed():
-	desactivar_activar_botones(true)
+	
 	if GlobalServer.dic_botones["terceroB"] == "vacio":
+		desactivar_activar_botones(true)
 		if GlobalServer.jugador == "Server":
-			print("Server  " + " terceroB")
+#			print("Server  " + " terceroB")
 			GlobalServer.ServerCambiaDic("terceroB","Server")
 		elif GlobalServer.jugador == "cliente":
 			GlobalServer.ClientePulsacion("terceroB",GlobalServer.jugador)
@@ -116,8 +121,9 @@ func _on_3B_pressed():
 		pass
 
 func _on_1C_pressed():
-	desactivar_activar_botones(true)
+	
 	if GlobalServer.dic_botones["primeroC"] == "vacio":
+		desactivar_activar_botones(true)
 		if GlobalServer.jugador == "Server":
 #			print("Server  " + " primeroC")
 			GlobalServer.ServerCambiaDic("primeroC","Server")
@@ -127,10 +133,11 @@ func _on_1C_pressed():
 		pass
 
 func _on_2C_pressed():
-	desactivar_activar_botones(true)
+	
 	if GlobalServer.dic_botones["segundoC"] == "vacio":
+		desactivar_activar_botones(true)
 		if GlobalServer.jugador == "Server":
-			print("Server  " + " segundoC")
+#			print("Server  " + " segundoC")
 			GlobalServer.ServerCambiaDic("segundoC","Server")
 		elif GlobalServer.jugador == "cliente":
 			GlobalServer.ClientePulsacion("segundoC",GlobalServer.jugador)
@@ -138,10 +145,11 @@ func _on_2C_pressed():
 		pass
 
 func _on_3C_pressed():
-	desactivar_activar_botones(true)
+	
 	if GlobalServer.dic_botones["terceroC"] == "vacio":
+		desactivar_activar_botones(true)
 		if GlobalServer.jugador == "Server":
-			print("Server  " + " terceroC")
+#			print("Server  " + " terceroC")
 			GlobalServer.ServerCambiaDic("terceroC","Server")
 		elif GlobalServer.jugador == "cliente":
 			GlobalServer.ClientePulsacion("terceroC",GlobalServer.jugador)

@@ -1,8 +1,7 @@
-extends Node2D
+extends Popup
 
 
-# Declare member variables here. Examples:
-# var a = 2
+
 var imagenWin = preload("res://img/imgWin.png")
 var imagenLose = preload("res://img/imgLose.png")
 
@@ -12,7 +11,7 @@ func _ready():
 
 func IntanciarImagenResult(ganador):
 	if ganador == GlobalServer.jugador:
-		$GanarPop/Sprite.set_texture(imagenWin)
+		imagenWin.instance()
 	else:
-		$GanarPop/Sprite.set_texture(imagenLose)
-
+		imagenLose.instance()
+		
