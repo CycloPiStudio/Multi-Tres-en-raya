@@ -171,7 +171,7 @@ func ComprobarResultado(idjugador):
 #			print("HAS GANADO!!!!!!!!!!!!!!!, idjugador: ", idjugador)
 			return idjugador
 ################################# diagonales
-		[idjugador, sA, tA, pB, sB, idjugador, pC, sC, idjugador]:
+		[idjugador, sA, tA, pB, idjugador, tB, pC, sC, idjugador]:
 #			print("HAS GANADO!!!!!!!!!!!!!!!, idjugador: ", idjugador)
 			return idjugador
 		[pA, sA, idjugador, pB, idjugador, tB, idjugador, sC, tC]:
