@@ -9,6 +9,8 @@ Indicar cuando un jugador se sale del juego
 
 Sustituir textos en las casillas  por imágenes
 
+
+
 Collaborators and partners:
 
 Cyclo π Studio in Github https://cyclopistudio.github.io/
