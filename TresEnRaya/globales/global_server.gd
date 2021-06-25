@@ -7,21 +7,17 @@ var peer = NetworkedMultiplayerENet.new()
 var MAX_PLAYERS = 2
 #var SERVER_IP = "192.168.18.32"
 
-
 onready var dic_botones = {
 	"primeroA" : "vacio","segundoA" : "vacio","terceroA" : "vacio",
 	"primeroB" : "vacio","segundoB" : "vacio","terceroB" : "vacio",
 	"primeroC" : "vacio","segundoC" : "vacio","terceroC" : "vacio"
 	}
 
-onready var scene = preload("res://Juego.tscn")
+onready var escenaSeleccionar = preload("res://Seleccionar.tscn")
+onready var sceneJuego = preload("res://Juego.tscn")
 onready var scenaprincipal = get_tree().get_root().get_node("EscenaPrincipal")
 onready var Ganarpop = get_tree().get_root().get_node("EscenaPrincipal/GanarPop")
 
-
-func _ready():
-	
-	pass
 
 func create_server(SERVER_PORT):
 	
@@ -38,15 +34,22 @@ func create_client(SERVER_IP, SERVER_PORT):
 	get_tree().network_peer = peer
 	peer.connect("connection_failed", self, "_OnConnectionFailed")
 	peer.connect("connection_succeeded", self, "_OnConnectionSucceeded")
+	peer.connect("server_disconnected" , self, "_OnServerDisconnected")
 
 
 func _OnConnectionFailed():
-	print(" fallo de red")
-	end_juego()
+	var resu = (" fallo de red ... intentelo de nuevo")
+	get_tree().get_root().get_node("EscenaPrincipal/Seleccionar").PrintarResult(resu)
+	scenaprincipal.get_node("Seleccionar").desactivarBotones(false)
+	
 func _OnConnectionSucceeded():
 	print("Conectado al servidor")
 	start_juego()
 
+func _OnServerDisconnected():
+	print("Servidor desconectado")
+	volver_inicio("Servidor desconectado")
+	
 func _Peer_Connected(player_id):
 	print("User " + str(player_id) + " Connected")
 	start_juego()
@@ -54,27 +57,42 @@ func _Peer_Connected(player_id):
 
 func _Peer_Disconnected(player_id):
 	print("User " + str(player_id) + " Disconnected")
-	end_juego()
+	volver_inicio("Cliente desconectado")
 
 func start_juego():
-	var nodo_principal = get_node("/root/EscenaPrincipal")
-	var node = scene.instance()
+
+	var node = sceneJuego.instance()	
+	scenaprincipal.add_child(node)
 	
-	nodo_principal.add_child(node)
 	get_tree().get_root().get_node("EscenaPrincipal/Seleccionar").queue_free()
 
-	
+func volver_inicio(resultado):
+	var node = escenaSeleccionar.instance()
+	scenaprincipal.add_child(node)
+	get_tree().get_root().get_node("EscenaPrincipal/Seleccionar").PrintarResult(resultado)
+	get_tree().get_root().get_node("EscenaPrincipal/Juego").queue_free()
+
+func reiniciar():
+	dic_botones = {
+	"primeroA" : "vacio","segundoA" : "vacio","terceroA" : "vacio",
+	"primeroB" : "vacio","segundoB" : "vacio","terceroB" : "vacio",
+	"primeroC" : "vacio","segundoC" : "vacio","terceroC" : "vacio"
+	}
+	scenaprincipal.get_node("Juego").actualizarBotones()
+	Ganarpop.visible = false
+	if jugador == "Server":
+		scenaprincipal.get_node("Juego").desactivar_activar_botones(true)
+	elif jugador == "cliente":
+		scenaprincipal.get_node("Juego").desactivar_activar_botones(false)
 
 
 #### el cliente manda la pulsacion al servidor #####
 func ClientePulsacion(boton, idjugador):
-#
+	
 	rpc_unreliable_id(1, "ClienteCambiaDic", boton, idjugador)
 
-
-
 ####el servidor recive la pulsacion 
-remote func ClienteCambiaDic(boton, idjugador):	
+remote func ClienteCambiaDic(boton, idjugador):
 	ServerCambiaDic(boton, idjugador)
 
 
@@ -127,12 +145,11 @@ remote func clienteReciveDic(dic, idjugador, ganador):
 	if ganador == idjugador:
 		GanarPerder(ganador)
 	
-func end_juego():
-	pass
-
+	
 func GanarPerder(ganador):
 	scenaprincipal.IntanciarImagenResult(ganador)
 	Ganarpop.visible = true
+	scenaprincipal.get_node("Timer").start()
 	print("Gano :  ", ganador)
 
 #### introducir casos
