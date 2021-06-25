@@ -17,7 +17,7 @@ func _ready():
 
 
 func _on_Cliente_pressed():
-	desactivarBotones()
+	desactivarBotones(true)
 	GlobalServer.jugador = "cliente"
 	var SERVER_IP = ClienteTextEditSERVER_IP.get_text() 
 	var SERVER_PORT = int(ClienteTextEditSERVER_PORT.get_text())
@@ -28,7 +28,7 @@ func _on_Cliente_pressed():
 
 
 func _on_Server_pressed():
-	desactivarBotones()
+	desactivarBotones(true)
 	GlobalServer.jugador = "Server"
 	
 	var SERVER_PORT = int(ServerTextEditSERVER_PORT.get_text())
@@ -39,6 +39,6 @@ func _on_Server_pressed():
 func PrintarResult(resultado):
 	LabelResultados.set_text(resultado)
 	
-func desactivarBotones():
-	ClienteBoton.disabled = true
-	ServerBoton.disabled = true
+func desactivarBotones(d):
+	ClienteBoton.disabled = d
+	ServerBoton.disabled = d

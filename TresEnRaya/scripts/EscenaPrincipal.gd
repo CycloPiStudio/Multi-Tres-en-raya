@@ -16,3 +16,5 @@ func IntanciarImagenResult(ganador):
 	else:
 		$GanarPop/Sprite.set_texture(imagenLose)
 
+func _on_Timer_timeout():
+	GlobalServer.reiniciar()
