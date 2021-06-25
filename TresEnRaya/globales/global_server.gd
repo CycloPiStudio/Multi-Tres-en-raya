@@ -82,9 +82,10 @@ func reiniciar():
 	Ganarpop.visible = false
 	if jugador == "Server":
 		scenaprincipal.get_node("Juego").desactivar_activar_botones(true)
-	elif jugador == "cliente":
+	if jugador == "cliente":
 		scenaprincipal.get_node("Juego").desactivar_activar_botones(false)
-
+#	scenaprincipal.get_node("Juego").desactivar_activar_botones(false)
+#	pass
 
 #### el cliente manda la pulsacion al servidor #####
 func ClientePulsacion(boton, idjugador):
@@ -138,8 +139,8 @@ remote func clienteReciveDic(dic, idjugador, ganador):
 	dic_botones = dic
 	nodojuego.actualizarBotones()
 	#### activa los botones para simular los turnos #####
-	
-	if idjugador == "Server" and not ganador == idjugador:
+#	 and not ganador == idjugador
+	if idjugador == "Server":
 		nodojuego.desactivar_activar_botones(false)
 	
 	if ganador == idjugador:
